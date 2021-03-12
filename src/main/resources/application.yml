@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    username: AkiSky
+    password: A7HcAMCx2TrKWP22
+    url: jdbc:mysql://47.103.220.45:3306/akisky?useUnicode=true&charaterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
