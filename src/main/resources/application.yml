@@ -1,6 +1,8 @@
 spring:
   datasource:
     username: AkiSky
-    password: A7HcAMCx2TrKWP22
+    password: NMHMNMEBkIJbFn60DfhpoPqcZcpQRvkQXTKfgrHLUxOdT/xmu2vPS+6F5cnkvn22AEZyvMf1XnT/fMIpRIIfYQ==
+    publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIPjmo1KwNihLJebNc5AUKD4fCjRD5JL3asoEC+lfqsKr6Q2P922/LXspazNGnlcwPtAMrhLkTcLgHMTw3dmBhMCAwEAAQ==
     url: jdbc:mysql://47.103.220.45:3306/akisky?useUnicode=true&charaterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
