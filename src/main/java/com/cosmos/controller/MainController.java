@@ -1,7 +1,7 @@
 package com.cosmos.controller;
 
-import com.cosmos.pojo.Trend;
-import com.cosmos.service.TrendService;
+import com.cosmos.pojo.Dynamic;
+import com.cosmos.service.DynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,23 +15,23 @@ public class MainController {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
     @Autowired
-    private TrendService trendService;
+    private DynamicService dynamicService;
     @GetMapping("/QueryAllTrend")
-    public List<Trend> trend(){
+    public List<Dynamic> trend(){
         System.out.println("QueryAllTrend");
-        return trendService.QueryAllTrend();
+        return dynamicService.QueryAllTrend();
     }
     @GetMapping("/QueryFiveTrend")
-    public List<Trend> fiveTrend(){
+    public List<Dynamic> fiveTrend(){
         System.out.println("QueryFiveTrend");
-        return trendService.QueryAllTrend();
+        return dynamicService.QueryAllTrend();
     }
     @GetMapping("/redis/add")
     public String addRedisData(){
-        Trend trend = new Trend();
-        trend.setName("123");
-        trend.setContent("13523fffvf");
-        redisTemplate.opsForValue().set("tr",trend);
+        Dynamic dynamic = new Dynamic();
+        dynamic.setName("123");
+        dynamic.setContent("13523fffvf");
+        redisTemplate.opsForValue().set("tr", dynamic);
         redisTemplate.opsForValue().set("ab","tre214nd");
         return "成功";
     }
