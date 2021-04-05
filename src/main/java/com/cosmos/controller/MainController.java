@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @CrossOrigin//解决跨域问题
 @RestController
@@ -15,12 +14,6 @@ public class MainController {
     private RedisTemplate<String,Object> redisTemplate;
     @Autowired
     private DynamicService dynamicService;
-
-    @GetMapping("/QueryFiveTrend")
-    public List<Dynamic> fiveTrend(){
-        System.out.println("QueryFiveTrend");
-        return dynamicService.QueryAllTrend();
-    }
     @GetMapping("/redis/add")
     public String addRedisData(){
         Dynamic dynamic = new Dynamic();
