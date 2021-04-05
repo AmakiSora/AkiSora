@@ -1,4 +1,4 @@
-package com.cosmos.serviceImpl;
+package com.cosmos.serviceImpl.authorizeService;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;

@@ -4,11 +4,10 @@ import com.cosmos.pojo.Dynamic;
 import com.cosmos.service.DynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin//解决跨域问题
 @RestController
 public class MainController {
@@ -16,11 +15,7 @@ public class MainController {
     private RedisTemplate<String,Object> redisTemplate;
     @Autowired
     private DynamicService dynamicService;
-    @GetMapping("/QueryAllTrend")
-    public List<Dynamic> trend(){
-        System.out.println("QueryAllTrend");
-        return dynamicService.QueryAllTrend();
-    }
+
     @GetMapping("/QueryFiveTrend")
     public List<Dynamic> fiveTrend(){
         System.out.println("QueryFiveTrend");
