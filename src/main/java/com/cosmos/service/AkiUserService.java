@@ -1,5 +1,5 @@
 package com.cosmos.service;
 
 public interface AkiUserService {
-    String focus(String id);
+    String followState(String id,Boolean State);
 }

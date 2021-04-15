@@ -12,4 +12,6 @@ import java.util.Map;
 public interface DynamicMapper extends BaseMapper<Dynamic> {
     @Select("select dynamic.* ,akiUser.avatarURL from dynamic,akiUser where dynamic.id = akiUser.id")
     List<Map<String,Object>> queryAllDynamic();
+    @Select("")
+    List<Map<String,Object>> queryDy();
 }

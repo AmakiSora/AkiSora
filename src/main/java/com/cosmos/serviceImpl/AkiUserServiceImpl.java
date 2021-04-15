@@ -22,10 +22,14 @@ public class AkiUserServiceImpl implements AkiUserService {
     private FollowerMapper followerMapper;
     private final ResponseUtil responseUtil = new ResponseUtil();
     @Override
-    public String focus(String id) {
+    public String followState(String id,Boolean State) {
         Follower follower = new Follower();
         follower.setId(id);
         follower.setFansID(session.getAttribute("id").toString());
-        return responseUtil.success(JSON.toJSONString(followerMapper.insert(follower)),JSON.toJSONString("cheng"));
+        if (State){//关注
+            return responseUtil.success(JSON.toJSONString(followerMapper.follow(follower)),JSON.toJSONString("关注成功"));
+        }else {//取关
+            return responseUtil.success(JSON.toJSONString(followerMapper.unfollow(follower)),JSON.toJSONString("取关成功"));
+        }
     }
 }

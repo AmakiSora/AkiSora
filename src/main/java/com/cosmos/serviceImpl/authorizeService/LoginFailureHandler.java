@@ -11,10 +11,10 @@ import java.io.IOException;
 @Component
 public class LoginFailureHandler implements AuthenticationFailureHandler{//登录失败处理
     @Override
-    public void onAuthenticationFailure(HttpServletRequest httpServletRequest,
-                                        HttpServletResponse httpServletResponse,
+    public void onAuthenticationFailure(HttpServletRequest request,
+                                        HttpServletResponse response,
                                         AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.sendError(233);
+        response.getWriter().write("401");
         System.out.println("登录失败");
     }
 }

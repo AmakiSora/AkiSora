@@ -19,12 +19,10 @@ public class DynamicController {
     private DynamicService dynamicService;
     @GetMapping("/QueryAllTrend")
     public String trend(HttpServletResponse httpServletResponse){
-        System.out.println("QueryAllTrend");
         return dynamicService.QueryAllTrend();
     }
     @GetMapping("/notLogin/QueryAllDynamic")
     public String QueryAllDynamic(){
-        System.out.println("QueryAllDynamic");
         return dynamicService.QueryAllDynamic();
     }
     @GetMapping("testRedis1")
