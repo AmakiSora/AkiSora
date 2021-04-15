@@ -1,5 +1,6 @@
 package com.cosmos.serviceImpl.authorizeService;
 
+import com.cosmos.utils.ResponseUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -11,9 +12,8 @@ import java.io.IOException;
 
 @Component
 public class NoAccessHandler implements AuthenticationEntryPoint {//未登录或登录状态过期处理
-
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        System.out.println("尚未登录");
+        httpServletResponse.setStatus(401);
     }
 }

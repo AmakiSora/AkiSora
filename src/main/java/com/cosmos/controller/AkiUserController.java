@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AkiUserController {
     @Autowired
     private AkiUserService akiUserService;
-    @GetMapping("/focus/{id}")
+    @GetMapping("/focus/{id}")//关注操作
     public String focus(@PathVariable String id){
-        System.out.println(id);
         return akiUserService.focus(id);
     }
 }
