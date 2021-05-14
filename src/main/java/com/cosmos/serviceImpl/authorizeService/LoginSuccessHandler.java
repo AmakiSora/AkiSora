@@ -1,5 +1,10 @@
 package com.cosmos.serviceImpl.authorizeService;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cosmos.mapper.AkiUserMapper;
+import com.cosmos.pojo.AkiUser;
+import com.cosmos.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -13,14 +18,18 @@ import java.io.IOException;
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {//登录成功处理
     @Autowired
     private HttpSession session;
+    @Autowired
+    private AkiUserMapper akiUserMapper;
+    private ResponseUtil responseUtil = new ResponseUtil();
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication)throws IOException {
         System.out.println("登录成功");
+        QueryWrapper<AkiUser> akiUser = new QueryWrapper<>();
         session.setAttribute("id",authentication.getName());
-        response.getWriter().write("233");
-
+        akiUser.select(AkiUser.class,info->!info.getProperty().equals("password")).eq("id",authentication.getName());
+        response.getWriter().write(responseUtil.success(JSON.toJSONString(akiUserMapper.selectOne(akiUser))));
 //        response.setHeader("Access-Control-Allow-Origin","http://localhost:9999");
 //        response.setHeader("Access-Control-Allow-Credentials","true");
     }

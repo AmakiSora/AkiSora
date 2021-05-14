@@ -10,3 +10,8 @@ spring:
     host: ENC(PQzHLWFc/WL7YgJT5cepYgFYfL/yy1x2)
     port: 6379
     password: ENC(KPXfxRXaucQvFiQmAZozMvc6MHKYVP0y)
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 0
+      logic-not-delete-value: 1

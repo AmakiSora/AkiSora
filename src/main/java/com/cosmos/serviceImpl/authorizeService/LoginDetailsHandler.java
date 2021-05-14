@@ -1,5 +1,6 @@
 package com.cosmos.serviceImpl.authorizeService;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cosmos.mapper.AkiUserMapper;
 import com.cosmos.pojo.AkiUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,12 @@ public class LoginDetailsHandler implements UserDetailsService {//登录处理
     private AkiUserMapper akiUserMapper;
     @Autowired
     private PasswordEncoder passwordEncoder;//加密
+//    private QueryWrapper<AkiUser> akiUserQueryWrapper = new QueryWrapper<>();
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AkiUser akiUser = akiUserMapper.selectById(username);
+        QueryWrapper<AkiUser> akiUserQueryWrapper = new QueryWrapper<>();
+        akiUserQueryWrapper.eq("id",username).select("id","password");
+        AkiUser akiUser =  akiUserMapper.selectOne(akiUserQueryWrapper);
         if (username == null || "".equals(username)) {
             throw new RuntimeException("用户不能为空");
         }

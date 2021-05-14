@@ -17,17 +17,12 @@ public class DynamicController {
     private RedisTemplate<String,Object> redisTemplate;
     @Autowired
     private DynamicService dynamicService;
-    @GetMapping("/QueryAllTrend")
-    public String trend(HttpServletResponse httpServletResponse){
-        return dynamicService.QueryAllTrend();
+    @GetMapping("/QueryMyDynamic")
+    public String queryMyDynamic(HttpServletResponse httpServletResponse){
+        return dynamicService.QueryMyDynamic();
     }
     @GetMapping("/notLogin/QueryAllDynamic")
-    public String QueryAllDynamic(){
+    public String notLoginQueryAllDynamic(){
         return dynamicService.QueryAllDynamic();
-    }
-    @GetMapping("testRedis1")
-    public String testRedis(){
-
-        return "test Success";
     }
 }
