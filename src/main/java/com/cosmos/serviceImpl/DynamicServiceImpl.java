@@ -23,8 +23,8 @@ public class DynamicServiceImpl implements DynamicService {
     private HttpSession session;
     private final ResponseUtil responseUtil = new ResponseUtil();
     @Override
-    public String QueryAllDynamic() {//查询所有动态
-        return responseUtil.success(JSON.toJSONString(dynamicMapper.queryAllDynamic()));
+    public String QueryRangeDynamic(int page,int page_size) {//查询部分动态
+        return responseUtil.success(JSON.toJSONString(dynamicMapper.queryRangeDynamic(page,page_size)));
     }
     @Override
     public String QueryMyDynamic() {//查询我的动态

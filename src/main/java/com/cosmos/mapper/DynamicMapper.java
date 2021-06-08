@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Repository
 public interface DynamicMapper extends BaseMapper<Dynamic> {
-    @Select("select dynamic.* ,akiUser.avatarURL from dynamic,akiUser where dynamic.id = akiUser.id order by uploadTime desc")
-    List<Map<String,Object>> queryAllDynamic();
+    @Select("select dynamic.* ,akiUser.avatarURL from dynamic,akiUser where dynamic.id = akiUser.id order by uploadTime desc limit #{page},#{page_size}")
+    List<Map<String,Object>> queryRangeDynamic(int page,int page_size);
 
 }

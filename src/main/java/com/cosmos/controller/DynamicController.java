@@ -21,8 +21,8 @@ public class DynamicController {
     public String queryMyDynamic(HttpServletResponse httpServletResponse){
         return dynamicService.QueryMyDynamic();
     }
-    @GetMapping("/notLogin/QueryAllDynamic")
-    public String notLoginQueryAllDynamic(){
-        return dynamicService.QueryAllDynamic();
+    @GetMapping("/notLogin/QueryRangeDynamic")
+    public String notLoginQueryRangeDynamic(int page,int page_size){
+        return dynamicService.QueryRangeDynamic(page,page_size);
     }
 }
