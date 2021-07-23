@@ -27,9 +27,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {//登�
                                         Authentication authentication)throws IOException {
         System.out.println("登录成功");
         QueryWrapper<AkiUser> akiUser = new QueryWrapper<>();
+        //todo 取消session
         session.setAttribute("id",authentication.getName());
         akiUser.select(AkiUser.class,info->!info.getProperty().equals("password")).eq("id",authentication.getName());
-        response.getWriter().write(responseUtil.success(JSON.toJSONString(akiUserMapper.selectOne(akiUser))));
+        String s = JSON.toJSONString(akiUserMapper.selectOne(akiUser));//用户信息
+        JwtUtil jwtUtil = new JwtUtil();
+        String token = ",\"token\":\""+jwtUtil.createToken("nmsl","zfg")+"\"";
+        response.getWriter().write(responseUtil.success(s+token));
 //        response.setHeader("Access-Control-Allow-Origin","http://localhost:9999");
 //        response.setHeader("Access-Control-Allow-Credentials","true");
     }
