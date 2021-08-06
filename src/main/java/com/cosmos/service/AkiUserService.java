@@ -1,5 +1,7 @@
 package com.cosmos.service;
 
+import com.cosmos.utils.ResponseMsg;
+
 public interface AkiUserService {
-    String followState(String id,Boolean State);
+    ResponseMsg<Integer> followState(String id, Boolean State);
 }

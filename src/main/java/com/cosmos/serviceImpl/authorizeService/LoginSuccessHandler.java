@@ -33,7 +33,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {//登�
         String s = JSON.toJSONString(akiUserMapper.selectOne(akiUser));//用户信息
         JwtUtil jwtUtil = new JwtUtil();
         String token = ",\"token\":\""+jwtUtil.createToken("nmsl","zfg")+"\"";
-        response.getWriter().write(responseUtil.success(s+token));
+        response.getWriter().write(responseUtil.success(s+token));//todo 修改返回方式
 //        response.setHeader("Access-Control-Allow-Origin","http://localhost:9999");
 //        response.setHeader("Access-Control-Allow-Credentials","true");
     }
