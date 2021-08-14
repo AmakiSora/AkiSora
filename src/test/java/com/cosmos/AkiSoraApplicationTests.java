@@ -19,12 +19,5 @@ class AkiSoraApplicationTests {
         List<Dynamic> userList = dynamicMapper.selectList(null);
         userList.forEach(System.out::println);
     }
-    @Test
-    public void testrespon(){
-        System.out.println(ResponseMsg.success("666"));
-        System.out.println(ResponseMsg.fail());
-        System.out.println(ResponseMsg.error());
-        System.out.println(ResponseMsg.customize(233,"dcde"));
-    }
 
 }

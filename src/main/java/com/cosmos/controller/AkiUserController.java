@@ -1,5 +1,6 @@
 package com.cosmos.controller;
 
+import com.cosmos.pojo.AkiUser;
 import com.cosmos.service.AkiUserService;
 import com.cosmos.utils.ResponseMsg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,4 +20,6 @@ public class AkiUserController {
     public ResponseMsg<Integer> unfollow(@PathVariable String id){
         return akiUserService.followState(id,false);
     }
+    @GetMapping("/getInfo/{id}")//获取用户信息
+    public ResponseMsg<AkiUser> getInfo(@PathVariable String id){ return akiUserService.getInfo(id); }
 }

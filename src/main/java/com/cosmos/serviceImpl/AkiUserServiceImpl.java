@@ -1,8 +1,9 @@
 package com.cosmos.serviceImpl;
 
-import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cosmos.mapper.AkiUserMapper;
 import com.cosmos.mapper.FollowerMapper;
+import com.cosmos.pojo.AkiUser;
 import com.cosmos.pojo.Follower;
 import com.cosmos.service.AkiUserService;
 import com.cosmos.utils.ResponseMsg;
@@ -31,4 +32,13 @@ public class AkiUserServiceImpl implements AkiUserService {
             return ResponseMsg.customize(200,"取关成功!",followerMapper.unfollow(follower));
         }
     }
+
+    @Override
+    public ResponseMsg<AkiUser> getInfo(String id) {
+        QueryWrapper<AkiUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("id","name","avatarURL","followNum","fansNum","dynamicNum");
+        queryWrapper.eq("id",id);
+        return ResponseMsg.success(akiUserMapper.selectOne(queryWrapper));
+    }
+
 }

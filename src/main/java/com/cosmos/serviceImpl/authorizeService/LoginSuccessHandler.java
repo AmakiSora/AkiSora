@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cosmos.mapper.AkiUserMapper;
 import com.cosmos.pojo.AkiUser;
-import com.cosmos.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -20,7 +19,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {//登�
     private HttpSession session;
     @Autowired
     private AkiUserMapper akiUserMapper;
-    private ResponseUtil responseUtil = new ResponseUtil();
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
@@ -32,9 +30,14 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {//登�
         akiUser.select(AkiUser.class,info->!info.getProperty().equals("password")).eq("id",authentication.getName());
         String s = JSON.toJSONString(akiUserMapper.selectOne(akiUser));//用户信息
         JwtUtil jwtUtil = new JwtUtil();
-        String token = ",\"token\":\""+jwtUtil.createToken("nmsl","zfg")+"\"";
-        response.getWriter().write(responseUtil.success(s+token));//todo 修改返回方式
+        String token = "\""+jwtUtil.createToken("nmsl","zfg")+"\"";
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(success(token));
 //        response.setHeader("Access-Control-Allow-Origin","http://localhost:9999");
 //        response.setHeader("Access-Control-Allow-Credentials","true");
+    }
+    private String success(String data){//成功，返回数据
+        return "{\"code\": 200," +
+                "\"token\": " + data + "}";
     }
 }

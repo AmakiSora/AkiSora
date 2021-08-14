@@ -5,7 +5,6 @@ import com.cosmos.mapper.AkiUserMapper;
 import com.cosmos.mapper.DynamicMapper;
 import com.cosmos.pojo.Dynamic;
 import com.cosmos.service.DynamicService;
-import com.cosmos.utils.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

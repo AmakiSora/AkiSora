@@ -7,11 +7,18 @@ public class ResponseMsg<T> {
     private int code;//状态值
     private String message;//描述信息
     private T data;//数据
-    //成功,返回数据
+    //成功,仅返回数据
     public static <T>ResponseMsg<T> success(T data){
         ResponseMsg<T> responseMsg = new ResponseMsg<>();
         responseMsg.setCode(Code.SUCCESS.code);
-        responseMsg.setMessage(Code.SUCCESS.msg);
+        responseMsg.setData(data);
+        return responseMsg;
+    }
+    //成功,返回数据和提示
+    public static <T>ResponseMsg<T> success(T data,String msg){
+        ResponseMsg<T> responseMsg = new ResponseMsg<>();
+        responseMsg.setCode(Code.SUCCESS.code);
+        responseMsg.setMessage(msg);
         responseMsg.setData(data);
         return responseMsg;
     }
@@ -45,9 +52,9 @@ public class ResponseMsg<T> {
         return responseMsg;
     }
     enum Code{
-        SUCCESS(100,"成功"),
+        SUCCESS(200,"成功"),
         FAIL(999,"失败"),
-        ERROR(400,"错误");
+        ERROR(500,"错误");
         private final int code;
         private final String msg;
         Code(int code,String msg){
