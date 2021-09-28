@@ -1,6 +1,13 @@
 package com.cosmos.config;
 
-import com.cosmos.serviceImpl.authorizeService.*;
+import com.cosmos.modules.login.handler.AuthorizeSessionInformationExpiredStrategy;
+import com.cosmos.modules.login.jwt.JwtAuthenticationProvider;
+import com.cosmos.modules.login.jwt.JwtLoginFilter;
+import com.cosmos.modules.login.jwt.JwtTokenFilter;
+import com.cosmos.modules.login.service.LoginDetailsService;
+import com.cosmos.modules.login.handler.LoginFailureHandler;
+import com.cosmos.modules.login.handler.LoginSuccessHandler;
+import com.cosmos.modules.login.handler.NoAccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
     @Autowired
-    private LoginDetailsHandler loginDetailsHandler;
+    private LoginDetailsService loginDetailsService;
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
     @Autowired
@@ -37,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private NoAccessHandler noAccessHandler;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(loginDetailsHandler);//登录处理
+        auth.userDetailsService(loginDetailsService);//登录处理
     }
     @Override//授权
     protected void configure(HttpSecurity http) throws Exception {
@@ -88,7 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {//跨域设置
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:9999"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
         configuration.addAllowedHeader("token");//添加允许的请求头
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
